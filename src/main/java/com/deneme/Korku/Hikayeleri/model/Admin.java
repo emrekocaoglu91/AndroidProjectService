@@ -7,7 +7,7 @@ import java.io.Serializable;
 @Entity(name = "ADMIN")
 public class Admin implements Serializable {
     @Id
-    private long id;
+    private Long id;
 
     public long getId() {
         return id;
