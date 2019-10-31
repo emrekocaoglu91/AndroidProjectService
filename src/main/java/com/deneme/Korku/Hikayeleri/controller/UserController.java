@@ -25,6 +25,8 @@ public class UserController {
             return new ResponseEntity(userService.getUser(id), HttpStatus.OK);
 
         }catch (Exception e){
+            System.out.println(e);
+            System.out.println("hey");
             e.getStackTrace();
             return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
         }
