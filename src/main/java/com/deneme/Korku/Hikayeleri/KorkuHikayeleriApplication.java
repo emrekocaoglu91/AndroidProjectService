@@ -12,7 +12,5 @@ public class KorkuHikayeleriApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(KorkuHikayeleriApplication.class, args);
-
-		//deneme
 	}
 }
