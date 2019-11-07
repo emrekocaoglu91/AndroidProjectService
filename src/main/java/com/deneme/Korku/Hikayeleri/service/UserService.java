@@ -1,21 +1,13 @@
 package com.deneme.Korku.Hikayeleri.service;
 
-import com.deneme.Korku.Hikayeleri.model.User;
+import com.deneme.Korku.Hikayeleri.shared.dto.UserDto;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 public interface UserService {
 
-    public User save(User user);
+    public UserDto createUser(UserDto userDto);
 
-    public void delete(User user);
-
-    public User getUser(Long id);
-
-    public List<User> getAllUsers();
 
 
 }

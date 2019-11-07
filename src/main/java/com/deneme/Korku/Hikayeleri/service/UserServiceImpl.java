@@ -1,41 +1,35 @@
 package com.deneme.Korku.Hikayeleri.service;
 
-import com.deneme.Korku.Hikayeleri.model.User;
+import com.deneme.Korku.Hikayeleri.entity.UserEntity;
 import com.deneme.Korku.Hikayeleri.repository.UserRepository;
+import com.deneme.Korku.Hikayeleri.shared.dto.UserDto;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
-public class UserServiceImpl implements  UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserRepository userRepository;
+    UserRepository userRepository;
 
     @Override
-    public User save(User user) {
-        return userRepository.save(user);
+    public UserDto createUser(UserDto userDto) {
+        UserEntity userEntity = new UserEntity();
+
+        BeanUtils.copyProperties(userDto, userEntity);
+
+        userEntity.setEncryptedPassword("test");
+        userEntity.setUserId("testUserId");
+
+
+        UserEntity storedUserEntity = userRepository.save(userEntity);
+
+        UserDto dto = new UserDto();
+
+        BeanUtils.copyProperties(storedUserEntity,dto);
+
+        return dto;
     }
 
-    @Override
-    public void delete(User user){
-        userRepository.delete(user);
-    }
-
-    @Override
-    public User getUser(Long id) {
-        User user = userRepository.getOne(id);
-            if (user.getId() != 0) {
-                return user;
-            }else {
-                return null;
-            }
-
-    }
-
-    @Override
-    public List<User> getAllUsers() {
-        return userRepository.findAllByIsActive('Y');
-    }
 }
