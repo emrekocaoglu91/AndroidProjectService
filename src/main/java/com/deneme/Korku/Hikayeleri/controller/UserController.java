@@ -6,7 +6,6 @@ import com.deneme.Korku.Hikayeleri.service.UserService;
 import com.deneme.Korku.Hikayeleri.shared.dto.UserDto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
