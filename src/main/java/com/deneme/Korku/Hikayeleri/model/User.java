@@ -88,4 +88,8 @@ public class User implements Serializable {
     public void setIsActive(char isActive) {
         this.isActive = isActive;
     }
+
+    public User(@NotNull String userName) {
+        this.userName = userName;
+    }
 }
