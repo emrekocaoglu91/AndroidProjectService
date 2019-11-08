@@ -34,6 +34,8 @@ public class UserServiceImpl implements UserService {
         String publicUserId = utils.generateUserId(30);
         userEntity.setUserId(publicUserId);
 
+        System.out.println("deneme");
+
         userEntity.setEncryptedPassword("test");
         UserEntity storedUserEntity = userRepository.save(userEntity);
 
