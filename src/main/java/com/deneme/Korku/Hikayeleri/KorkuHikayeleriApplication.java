@@ -2,6 +2,7 @@ package com.deneme.Korku.Hikayeleri;
 
 import com.deneme.Korku.Hikayeleri.entity.UserEntity;
 import com.deneme.Korku.Hikayeleri.repository.UserRepository;
+import com.deneme.Korku.Hikayeleri.security.AppProperties;
 import com.deneme.Korku.Hikayeleri.service.UserServiceImpl;
 import com.deneme.Korku.Hikayeleri.shared.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,5 +34,12 @@ public class KorkuHikayeleriApplication {
 	public SpringApplicationContext springApplicationContext(){
 		return new SpringApplicationContext();
 	}
+
+	@Bean(name = "AppProperties")
+	public AppProperties getAppProperties(){
+		return new AppProperties();
+	}
+
+
 
 }

@@ -1,6 +1,7 @@
 package com.deneme.Korku.Hikayeleri.service;
 
 import com.deneme.Korku.Hikayeleri.entity.UserEntity;
+import com.deneme.Korku.Hikayeleri.model.response.ErrorMessages;
 import com.deneme.Korku.Hikayeleri.repository.UserRepository;
 import com.deneme.Korku.Hikayeleri.shared.dto.UserDto;
 import com.deneme.Korku.Hikayeleri.shared.dto.Utils;
@@ -30,10 +31,10 @@ public class UserServiceImpl implements UserService {
     public UserDto createUser(UserDto userDto) {
 
         if (userRepository.findByEmail(userDto.getEmail()) != null)
-            throw new RuntimeException("Record already exists.");
+            throw new RuntimeException(ErrorMessages.RECORD_EMAIL_ALREADY_EXISTS.getErrorMessage());
 
         if (userRepository.findByUserName(userDto.getUserName())!=null)
-            throw new RuntimeException("This user name already exists.");
+            throw new RuntimeException(ErrorMessages.RECORD_USERNAME_ALREADY_EXISTS.getErrorMessage());
 
         UserEntity userEntity = new UserEntity();
 
@@ -65,6 +66,16 @@ public class UserServiceImpl implements UserService {
         UserDto returnValue = new UserDto();
         BeanUtils.copyProperties(userEntity,returnValue);
         return returnValue;
+    }
+
+    @Override
+    public UserDto getUserByUserId(String userId) throws Exception {
+        UserEntity userEntity = userRepository.findByUserId(userId);
+        if (userEntity==null) throw new Exception("User not found !");
+
+        UserDto userDto = new UserDto();
+        BeanUtils.copyProperties(userEntity,userDto);
+        return userDto;
     }
 
     @Override

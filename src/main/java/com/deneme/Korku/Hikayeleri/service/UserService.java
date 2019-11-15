@@ -10,5 +10,5 @@ public interface UserService extends UserDetailsService {
     public UserDto getUser(String userName);
 
 
-
+    public UserDto getUserByUserId(String userId) throws Exception;
 }
