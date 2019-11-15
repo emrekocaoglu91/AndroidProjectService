@@ -35,6 +35,9 @@ public class UserEntity implements Serializable {
     @Column(nullable = false,columnDefinition = "boolean default false")
     private boolean emailVerificationStatus;
 
+    @Column(nullable = false)
+    private String userName;
+
 
     public Long getId() {
         return id;
@@ -98,5 +101,13 @@ public class UserEntity implements Serializable {
 
     public void setEmailVerificationStatus(boolean emailVerificationStatus) {
         this.emailVerificationStatus = emailVerificationStatus;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

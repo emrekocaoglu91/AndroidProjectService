@@ -18,8 +18,9 @@ public class UserController {
     UserService userService;
 
 
+    @PostMapping
     @ResponseBody
-    @RequestMapping(value = "/create", method = RequestMethod.POST, produces= APPLICATION_JSON_VALUE,consumes = APPLICATION_JSON_VALUE)
+    @RequestMapping(method = RequestMethod.POST, produces= APPLICATION_JSON_VALUE,consumes = APPLICATION_JSON_VALUE)
     public UserRest createUser(@RequestBody UserDetailRequestModel userDetailRequestModel) {
 
         UserRest userRest = new UserRest();
@@ -33,5 +34,14 @@ public class UserController {
 
         return userRest;
     }
+
+    @GetMapping
+    @RequestMapping(method = RequestMethod.GET,produces = APPLICATION_JSON_VALUE,consumes = APPLICATION_JSON_VALUE)
+    public String getUser(){
+        return "get user";
+    }
+
+
+
 
 }

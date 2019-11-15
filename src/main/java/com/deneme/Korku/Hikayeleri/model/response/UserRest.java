@@ -13,6 +13,7 @@ public class UserRest {
 
     private char isActive;
 
+    private String userName;
 
     public String getUserId() {
         return userId;
@@ -52,5 +53,13 @@ public class UserRest {
 
     public void setIsActive(char isActive) {
         this.isActive = isActive;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
