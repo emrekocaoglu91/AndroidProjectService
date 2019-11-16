@@ -33,7 +33,7 @@ public class StoryController {
     public ResponseEntity<Story> getStory(@PathVariable String id) {
         Long storyId = Long.parseLong(id);
         Optional<Story> story = storyService.findStoryById(storyId);
-        return story.map(story1 -> new ResponseEntity<>(story1, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_ACCEPTABLE));
+        return story.map(story1 -> new ResponseEntity<>(story1, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
 
     }
 
