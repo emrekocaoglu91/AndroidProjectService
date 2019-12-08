@@ -1,6 +1,7 @@
 package com.deneme.Korku.Hikayeleri.security;
 
 import com.deneme.Korku.Hikayeleri.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -44,4 +45,11 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
     }
 
 
+    //TODO
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("emrkcglu").password("123");
+    }
 }

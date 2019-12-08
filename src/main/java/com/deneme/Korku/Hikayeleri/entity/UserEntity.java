@@ -1,9 +1,6 @@
 package com.deneme.Korku.Hikayeleri.entity;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity(name = "USERS")
@@ -11,7 +8,7 @@ public class UserEntity implements Serializable {
 
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false)
@@ -37,6 +34,9 @@ public class UserEntity implements Serializable {
 
     @Column(nullable = false)
     private String userName;
+
+    @Column(length = 1)
+    private Character isActive;
 
 
     public Long getId() {
@@ -109,5 +109,13 @@ public class UserEntity implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public char getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(char isActive) {
+        this.isActive = isActive;
     }
 }
