@@ -1,13 +1,13 @@
 package com.deneme.Korku.Hikayeleri.service;
 
-import com.deneme.Korku.Hikayeleri.model.Story;
+import com.deneme.Korku.Hikayeleri.model.response.StoryRest;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface StoryService {
 
-    List<Story> getAllStories();
+    List<StoryRest> getAllStories();
 
-    Optional<Story> findStoryById(Long id);
+    Optional<StoryRest> findStoryById(Long id);
 }

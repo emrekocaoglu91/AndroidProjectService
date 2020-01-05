@@ -1,6 +1,6 @@
 package com.deneme.Korku.Hikayeleri.service;
 
-import com.deneme.Korku.Hikayeleri.model.Story;
+import com.deneme.Korku.Hikayeleri.model.response.StoryRest;
 import com.deneme.Korku.Hikayeleri.repository.StoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,12 +15,12 @@ public class StoryServiceImpl implements StoryService {
     StoryRepository storyRepository;
 
     @Override
-    public List<Story> getAllStories() {
+    public List<StoryRest> getAllStories() {
         return storyRepository.findAll();
     }
 
     @Override
-    public Optional<Story> findStoryById(Long id) {
+    public Optional<StoryRest> findStoryById(Long id) {
         return storyRepository.findById(id);
     }
 }

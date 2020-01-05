@@ -1,11 +1,15 @@
-package com.deneme.Korku.Hikayeleri.model;
+package com.deneme.Korku.Hikayeleri.model.response;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity(name = "STORY")
 
-public class Story implements Serializable {
+//TODO : Story request nesnesi oluştur.ContextData'sını içermemeli. BaseStoryOluştur ! Inherit edip context ekle .
+
+
+
+public class StoryRest implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
