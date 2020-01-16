@@ -1,13 +1,18 @@
 package com.deneme.Korku.Hikayeleri.service;
 
-import com.deneme.Korku.Hikayeleri.model.response.StoryRest;
+import com.deneme.Korku.Hikayeleri.entity.StoryEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public interface StoryService {
 
-    List<StoryRest> getAllStories();
+    List<StoryEntity> getAllStories();
 
-    Optional<StoryRest> findStoryById(Long id);
+    Optional<StoryEntity> findStoryById(Long id);
+
+    StoryEntity saveStory(StoryEntity storyEntity);
+
 }

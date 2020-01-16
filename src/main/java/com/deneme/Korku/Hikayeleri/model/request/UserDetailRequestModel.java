@@ -1,6 +1,8 @@
 package com.deneme.Korku.Hikayeleri.model.request;
 
-public class UserDetailRequestModel {
+import java.io.Serializable;
+
+public class UserDetailRequestModel implements Serializable {
 
     private String firstName;
     private String lastName;

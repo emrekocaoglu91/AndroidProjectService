@@ -1,14 +1,16 @@
 package com.deneme.Korku.Hikayeleri.model.response;
 
-public class CommentRest {
+import com.deneme.Korku.Hikayeleri.entity.CommentEntity;
 
-    private String commentText;
+public class CommentRest extends CommentEntity {
 
-    public String getCommentText() {
-        return commentText;
+    private String userName;
+
+    public String getUserName() {
+        return userName;
     }
 
-    public void setCommentText(String commentText) {
-        this.commentText = commentText;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

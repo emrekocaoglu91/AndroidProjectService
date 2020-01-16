@@ -1,15 +1,12 @@
-package com.deneme.Korku.Hikayeleri.model.response;
+package com.deneme.Korku.Hikayeleri.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity(name = "STORY")
 
-//TODO : Story request nesnesi oluştur.ContextData'sını içermemeli. BaseStoryOluştur ! Inherit edip context ekle .
+public class StoryEntity implements Serializable {
 
-
-
-public class StoryRest implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -23,14 +20,19 @@ public class StoryRest implements Serializable {
     @Column(name = "IS_ACTIVE")
     private char isActive;
 
-    //tag ve kategori eklenebilir.
+    @Column(name = "PIC_URL")
+    private String pictureURL;
 
 
-    public long getId() {
+    public StoryEntity() {
+        this.isActive = 'N';
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -56,5 +58,13 @@ public class StoryRest implements Serializable {
 
     public void setIsActive(char isActive) {
         this.isActive = isActive;
+    }
+
+    public String getPictureURL() {
+        return pictureURL;
+    }
+
+    public void setPictureURL(String pictureURL) {
+        this.pictureURL = pictureURL;
     }
 }

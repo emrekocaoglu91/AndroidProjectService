@@ -1,5 +1,6 @@
 package com.deneme.Korku.Hikayeleri.controller;
 
+import com.deneme.Korku.Hikayeleri.entity.StoryEntity;
 import com.deneme.Korku.Hikayeleri.entity.UserEntity;
 import com.deneme.Korku.Hikayeleri.exception.UserServiceException;
 import com.deneme.Korku.Hikayeleri.model.request.CommentRequestModel;
@@ -9,7 +10,6 @@ import com.deneme.Korku.Hikayeleri.repository.CommentRepository;
 import com.deneme.Korku.Hikayeleri.repository.UserRepository;
 import com.deneme.Korku.Hikayeleri.service.CommentService;
 import com.deneme.Korku.Hikayeleri.shared.dto.CommentDto;
-import com.deneme.Korku.Hikayeleri.shared.dto.StoryDto;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -50,10 +50,14 @@ public class CommentController {
 
         BeanUtils.copyProperties(commentRequestModel,commentDto);
 
-        StoryDto storyDto = new StoryDto();
-        storyDto.setId(storyID);
+        StoryEntity storyEntity = new StoryEntity();
+        storyEntity.setId(storyID);
         CommentDto commentDtoStored = commentService.createComment(commentDto,userEntity.getUserId(), storyID);
         BeanUtils.copyProperties(commentDtoStored, commentRest);
+       /* System.out.println(commentRest.getUserName());
+        System.out.println(commentRest.getCommentText());
+        System.out.println(commentRest.getStoryID());
+        System.out.println(userEntity.getUserId());*/
 
         return commentRest;
     }

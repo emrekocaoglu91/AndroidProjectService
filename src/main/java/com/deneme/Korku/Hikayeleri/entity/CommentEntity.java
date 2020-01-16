@@ -19,6 +19,14 @@ public class CommentEntity implements Serializable {
     @Column(name = "STORY_ID",nullable = false)
     private Long storyID;
 
+    @Column(name = "IS_ACTIVE")
+    private char isActive;
+
+
+    public CommentEntity() {
+        this.isActive = 'Y';
+    }
+
     public Long getId() {
         return id;
     }
@@ -49,5 +57,13 @@ public class CommentEntity implements Serializable {
 
     public void setStoryID(Long storyID) {
         this.storyID = storyID;
+    }
+
+    public char getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(char isActive) {
+        this.isActive = isActive;
     }
 }

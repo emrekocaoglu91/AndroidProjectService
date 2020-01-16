@@ -1,6 +1,8 @@
 package com.deneme.Korku.Hikayeleri.model.request;
 
-public class UserLoginRequestModel {
+import java.io.Serializable;
+
+public class UserLoginRequestModel implements Serializable {
 
     private String email;
     private String password;
