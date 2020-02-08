@@ -6,7 +6,17 @@ public class CommentDto {
 
     private String userID;
     private Long storyID;
+    private Character isActive;
+    private String commentDate;
 
+
+    public Character getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Character isActive) {
+        this.isActive = 'Y';
+    }
 
     public Long getId() {
         return id;
@@ -38,5 +48,13 @@ public class CommentDto {
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public String getCommentDate() {
+        return commentDate;
+    }
+
+    public void setCommentDate(String commentDate) {
+        this.commentDate = commentDate;
     }
 }

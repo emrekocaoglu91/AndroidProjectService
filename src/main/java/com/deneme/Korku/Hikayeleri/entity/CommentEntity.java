@@ -2,6 +2,8 @@ package com.deneme.Korku.Hikayeleri.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Entity(name = "COMMENTS")
 public class CommentEntity implements Serializable {
@@ -20,11 +22,21 @@ public class CommentEntity implements Serializable {
     private Long storyID;
 
     @Column(name = "IS_ACTIVE")
-    private char isActive;
+    private Character isActive;
+
+    @Column(name = "COMMENT_DATE")
+    private String commentDate;
+
+    @Column(name = "COMMENT_USER_NAME")
+    private String userName;
 
 
     public CommentEntity() {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        String strDate= formatter.format(new Date());
+
         this.isActive = 'Y';
+        this.commentDate = strDate;
     }
 
     public Long getId() {
@@ -59,11 +71,27 @@ public class CommentEntity implements Serializable {
         this.storyID = storyID;
     }
 
-    public char getIsActive() {
+    public Character getIsActive() {
         return isActive;
     }
 
     public void setIsActive(char isActive) {
         this.isActive = isActive;
+    }
+
+    public String getCommentDate() {
+        return commentDate;
+    }
+
+    public void setCommentDate(String commentDate) {
+        this.commentDate = commentDate;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

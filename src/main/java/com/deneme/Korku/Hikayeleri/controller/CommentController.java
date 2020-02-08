@@ -1,5 +1,6 @@
 package com.deneme.Korku.Hikayeleri.controller;
 
+import com.deneme.Korku.Hikayeleri.entity.CommentEntity;
 import com.deneme.Korku.Hikayeleri.entity.StoryEntity;
 import com.deneme.Korku.Hikayeleri.entity.UserEntity;
 import com.deneme.Korku.Hikayeleri.exception.UserServiceException;
@@ -16,6 +17,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.List;
 
 @RequestMapping("/comments")
 @RestController
@@ -46,13 +49,13 @@ public class CommentController {
 
 
         CommentRest commentRest = new CommentRest();
-        CommentDto commentDto= new CommentDto();
+        CommentDto commentDto = new CommentDto();
 
-        BeanUtils.copyProperties(commentRequestModel,commentDto);
+        BeanUtils.copyProperties(commentRequestModel, commentDto);
 
         StoryEntity storyEntity = new StoryEntity();
         storyEntity.setId(storyID);
-        CommentDto commentDtoStored = commentService.createComment(commentDto,userEntity.getUserId(), storyID);
+        CommentDto commentDtoStored = commentService.createComment(commentDto, userEntity.getUserId(), storyID,userName);
         BeanUtils.copyProperties(commentDtoStored, commentRest);
        /* System.out.println(commentRest.getUserName());
         System.out.println(commentRest.getCommentText());
@@ -60,6 +63,15 @@ public class CommentController {
         System.out.println(userEntity.getUserId());*/
 
         return commentRest;
+    }
+
+    @GetMapping(path = "/get/{storyId}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public List<CommentEntity> getComments(@PathVariable Long storyId) {
+
+        List<CommentEntity> commentEntityList = commentService.getStoryComments(storyId);
+
+
+        return commentEntityList;
     }
 
 

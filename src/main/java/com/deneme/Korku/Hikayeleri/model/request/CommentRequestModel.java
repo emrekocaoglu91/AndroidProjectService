@@ -10,6 +10,17 @@ public class CommentRequestModel implements Serializable {
 
     private String userID;
 
+    private Character isActive;
+
+    private String commentDate;
+
+    public Character getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(Character isActive) {
+        this.isActive = isActive;
+    }
 
     public String getCommentText() {
         return commentText;
@@ -33,5 +44,13 @@ public class CommentRequestModel implements Serializable {
 
     public void setUserID(String userID) {
         this.userID = userID;
+    }
+
+    public String getCommentDate() {
+        return commentDate;
+    }
+
+    public void setCommentDate(String commentDate) {
+        this.commentDate = commentDate;
     }
 }
