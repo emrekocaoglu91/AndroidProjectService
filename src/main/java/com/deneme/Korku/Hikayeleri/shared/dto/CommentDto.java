@@ -6,7 +6,7 @@ public class CommentDto {
 
     private String userID;
     private Long storyID;
-    private Character isActive;
+    private char isActive;
     private String commentDate;
 
 
@@ -14,7 +14,7 @@ public class CommentDto {
         return isActive;
     }
 
-    public void setIsActive(Character isActive) {
+    public void setIsActive(char isActive) {
         this.isActive = 'Y';
     }
 

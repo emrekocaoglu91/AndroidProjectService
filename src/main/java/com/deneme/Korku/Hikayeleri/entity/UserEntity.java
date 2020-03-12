@@ -9,6 +9,7 @@ public class UserEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "usersId")
     private Long id;
 
     @Column(nullable = false)
@@ -95,7 +96,7 @@ public class UserEntity implements Serializable {
         this.emailVerificationToken = emailVerificationToken;
     }
 
-    public boolean isEmailVerificationStatus() {
+    public boolean getEmailVerificationStatus() {
         return emailVerificationStatus;
     }
 

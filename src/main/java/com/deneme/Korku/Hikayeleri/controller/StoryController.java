@@ -1,6 +1,8 @@
 package com.deneme.Korku.Hikayeleri.controller;
 
 import com.deneme.Korku.Hikayeleri.entity.StoryEntity;
+import com.deneme.Korku.Hikayeleri.entity.UserStoryEntity;
+import com.deneme.Korku.Hikayeleri.model.request.UserStoryRequestModel;
 import com.deneme.Korku.Hikayeleri.service.StoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,7 +31,7 @@ public class StoryController {
     public ResponseEntity<StoryEntity> getStory(@PathVariable String id) {
         Long storyId = Long.parseLong(id);
         Optional<StoryEntity> story = storyService.findStoryById(storyId);
-        return story.map(story1 -> new ResponseEntity<>(story1, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(null, HttpStatus.NOT_FOUND));
+        return story.map(story1 -> new ResponseEntity<>(story1, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>((StoryEntity) null, HttpStatus.NOT_FOUND));
 
     }
 
@@ -39,9 +41,18 @@ public class StoryController {
             StoryEntity story = storyService.saveStory(storyEntity);
             return new ResponseEntity<>(story, HttpStatus.OK);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>((StoryEntity) null, HttpStatus.NO_CONTENT);
         }
     }
 
+    @PostMapping(path = "/postUserStory", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public ResponseEntity<UserStoryEntity> postUserStory(@RequestBody UserStoryRequestModel userStoryRequestModel) {
+        try {
+            return new ResponseEntity<UserStoryEntity>(storyService.saveUserStory(userStoryRequestModel), HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<UserStoryEntity>((UserStoryEntity) null, HttpStatus.BAD_REQUEST);
+        }
+    }
 
 }

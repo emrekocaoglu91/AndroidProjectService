@@ -35,7 +35,7 @@ public class CommentController {
 
     @PostMapping
     @RequestMapping(method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public CommentRest createComment(@RequestBody CommentRequestModel commentRequestModel, HttpServletRequest httpServletRequest, Long storyID) {
+    public CommentRest createComment(@RequestBody CommentRequestModel commentRequestModel, HttpServletRequest httpServletRequest) {
 
         String userName = httpServletRequest.getUserPrincipal().getName();
 
@@ -54,8 +54,8 @@ public class CommentController {
         BeanUtils.copyProperties(commentRequestModel, commentDto);
 
         StoryEntity storyEntity = new StoryEntity();
-        storyEntity.setId(storyID);
-        CommentDto commentDtoStored = commentService.createComment(commentDto, userEntity.getUserId(), storyID,userName);
+        storyEntity.setId(commentRequestModel.getStoryID());
+        CommentDto commentDtoStored = commentService.createComment(commentDto, userEntity.getUserId(), commentRequestModel.getStoryID(),userName);
         BeanUtils.copyProperties(commentDtoStored, commentRest);
        /* System.out.println(commentRest.getUserName());
         System.out.println(commentRest.getCommentText());
@@ -65,13 +65,20 @@ public class CommentController {
         return commentRest;
     }
 
-    @GetMapping(path = "/get/{storyId}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
-    public List<CommentEntity> getComments(@PathVariable Long storyId) {
+    @PutMapping(path = "/getAllCommentsFromStory", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public List<CommentEntity> getComments(@RequestBody Long storyId) {
 
-        List<CommentEntity> commentEntityList = commentService.getStoryComments(storyId);
+        List<CommentEntity> commentEntityList = commentService.getStoryComments(storyId,'Y');
 
 
         return commentEntityList;
+    }
+
+    @PutMapping(path = "/delete",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+    public void deleteComment(@RequestBody Long commentId){
+
+        commentService.deleteComment(commentId);
+
     }
 
 

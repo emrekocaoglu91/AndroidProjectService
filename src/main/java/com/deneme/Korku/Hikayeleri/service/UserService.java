@@ -7,13 +7,19 @@ import java.util.List;
 
 public interface UserService extends UserDetailsService {
 
-    public UserDto createUser(UserDto userDto);
+     UserDto createUser(UserDto userDto);
 
-    public UserDto getUser(String userName);
+     UserDto getUser(String userName);
 
-    public UserDto getUserByUserId(String userId) throws Exception;
+     UserDto getUserByUserId(String userId) throws Exception;
 
-    public UserDto updateUser(String userId, UserDto userDto) throws Exception;
+     UserDto updateUser(String userId, UserDto userDto) throws Exception;
 
-    public List<UserDto> getAllUsers(int page, int limit);
+     List<UserDto> getAllUsers(int page, int limit);
+
+     boolean verifyEmailToken(String token);
+
+     boolean requestPasswordReset(String email);
+
+     boolean resetPassword(String token, String password);
 }

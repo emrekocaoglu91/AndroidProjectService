@@ -9,7 +9,7 @@ import java.util.Date;
 public class CommentEntity implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long id;
 
     @Column(length = 200,name = "COMMENT_TEXT")
@@ -18,7 +18,7 @@ public class CommentEntity implements Serializable {
     @Column(name = "USER_ID",nullable = false)
     private String userID;
 
-    @Column(name = "STORY_ID",nullable = false)
+    @Column(name = "COMMENT_STORY_ID",nullable = false)
     private Long storyID;
 
     @Column(name = "IS_ACTIVE")
@@ -32,7 +32,7 @@ public class CommentEntity implements Serializable {
 
 
     public CommentEntity() {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm");
         String strDate= formatter.format(new Date());
 
         this.isActive = 'Y';

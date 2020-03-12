@@ -10,7 +10,7 @@ public class CommentRequestModel implements Serializable {
 
     private String userID;
 
-    private Character isActive;
+    private char isActive;
 
     private String commentDate;
 
@@ -18,7 +18,7 @@ public class CommentRequestModel implements Serializable {
         return isActive;
     }
 
-    public void setIsActive(Character isActive) {
+    public void setIsActive(char isActive) {
         this.isActive = isActive;
     }
 
