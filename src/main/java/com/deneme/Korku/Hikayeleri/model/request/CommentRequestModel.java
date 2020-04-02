@@ -10,15 +10,15 @@ public class CommentRequestModel implements Serializable {
 
     private String userID;
 
-    private char isActive;
+    private String isActive;
 
     private String commentDate;
 
-    public Character getIsActive() {
+    public String getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(char isActive) {
+    public void setIsActive(String isActive) {
         this.isActive = isActive;
     }
 

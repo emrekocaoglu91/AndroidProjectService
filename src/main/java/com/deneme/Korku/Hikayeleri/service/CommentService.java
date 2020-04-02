@@ -9,8 +9,13 @@ public interface CommentService {
 
      CommentDto createComment(CommentDto commentDto,String userID, Long storyID,String userName);
 
-     List<CommentEntity> getStoryComments(Long storyID,Character character);
+     List<CommentEntity> getStoryComments(Long storyID);
 
      void deleteComment(Long commentId);
 
+     List<CommentEntity> getCommentsByUserId(String userID);
+
+     List<CommentEntity> setDeletedUserCommentToPassive(String userId);
+
+     List<CommentEntity> setReactiveUserCommentToActive(String userId);
 }

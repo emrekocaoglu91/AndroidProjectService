@@ -9,6 +9,7 @@ public class UserDetailRequestModel implements Serializable {
     private String email;
     private String password;
     private String userName;
+    private String isActive;
 
     public String getFirstName() {
         return firstName;
@@ -49,4 +50,6 @@ public class UserDetailRequestModel implements Serializable {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+
 }

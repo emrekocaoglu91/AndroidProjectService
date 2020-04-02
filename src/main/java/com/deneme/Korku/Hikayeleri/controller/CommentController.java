@@ -68,7 +68,7 @@ public class CommentController {
     @PutMapping(path = "/getAllCommentsFromStory", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public List<CommentEntity> getComments(@RequestBody Long storyId) {
 
-        List<CommentEntity> commentEntityList = commentService.getStoryComments(storyId,'Y');
+        List<CommentEntity> commentEntityList = commentService.getStoryComments(storyId);
 
 
         return commentEntityList;
@@ -76,7 +76,6 @@ public class CommentController {
 
     @PutMapping(path = "/delete",produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public void deleteComment(@RequestBody Long commentId){
-
         commentService.deleteComment(commentId);
 
     }

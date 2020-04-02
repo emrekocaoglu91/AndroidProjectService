@@ -1,5 +1,6 @@
 package com.deneme.Korku.Hikayeleri.service;
 
+import com.deneme.Korku.Hikayeleri.model.request.UserDetailRequestModel;
 import com.deneme.Korku.Hikayeleri.shared.dto.UserDto;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -22,4 +23,7 @@ public interface UserService extends UserDetailsService {
      boolean requestPasswordReset(String email);
 
      boolean resetPassword(String token, String password);
+
+     void deleteUser(String userName);
+
 }

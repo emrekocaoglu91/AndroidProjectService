@@ -22,8 +22,8 @@ public class Comment implements Serializable {
     @Column(name = "CONTEXT")
     private String contextData;
 
-    @Column(name = "IS_ACTIVE")
-    private char isActive;
+    @Column(name = "IS_ACTIVE",length = 1)
+    private String isActive;
 
 
     public long getId() {
@@ -66,11 +66,11 @@ public class Comment implements Serializable {
         this.contextData = contextData;
     }
 
-    public char getIsActive() {
+    public String getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(char isActive) {
+    public void setIsActive(String isActive) {
         this.isActive = isActive;
     }
 }

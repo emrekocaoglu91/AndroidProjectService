@@ -23,12 +23,12 @@ public class StoryServiceImpl implements StoryService {
 
     @Override
     public List<StoryEntity> getAllStories() {
-        return storyRepository.getAllByIsActive('Y');
+        return storyRepository.getAllByIsActive("Y");
     }
 
     @Override
     public Optional<StoryEntity> findStoryById(Long id) {
-        return storyRepository.findStoryByIdAndIsActive(id,'Y');
+        return storyRepository.findStoryByIdAndIsActive(id,"Y");
     }
 
     @Override

@@ -35,7 +35,7 @@ public class UserController {
     @RequestMapping(path = "/create", method = RequestMethod.POST, produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public UserRest createUser(@RequestBody UserDetailRequestModel userDetailRequestModel) throws Exception {
 
-        UserRest userRest = new UserRest();
+        UserRest userRest = new UserRest(true);
 
         if (userDetailRequestModel.getEmail().isEmpty() || userDetailRequestModel.getFirstName().isEmpty() || userDetailRequestModel.getLastName().isEmpty() || userDetailRequestModel.getPassword().isEmpty() || userDetailRequestModel.getUserName().isEmpty())
             throw new UserServiceException(ErrorMessages.MISSING_REQUIRED_FIELD.getErrorMessage());
@@ -53,7 +53,7 @@ public class UserController {
     @GetMapping(path = "/{id}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public UserRest getUser(@PathVariable String id) throws Exception {
 
-        UserRest userRest = new UserRest();
+        UserRest userRest = new UserRest(true);
 
         UserDto userDto = userService.getUserByUserId(id);
         BeanUtils.copyProperties(userDto, userRest);
@@ -66,7 +66,7 @@ public class UserController {
             consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
     public UserRest updateUser(@PathVariable String id, @RequestBody UserDetailRequestModel userDetailRequestModel) throws Exception {
-        UserRest userRest = new UserRest();
+        UserRest userRest = new UserRest(true);
 
         UserDto userDto = new UserDto();
         BeanUtils.copyProperties(userDetailRequestModel, userDto);
@@ -86,7 +86,7 @@ public class UserController {
         List<UserDto> userDtoList = userService.getAllUsers(page, limit);
 
         for (UserDto userDto : userDtoList) {
-            UserRest userRest = new UserRest();
+            UserRest userRest = new UserRest(true);
             BeanUtils.copyProperties(userDto, userRest);
             userRestList.add(userRest);
         }
@@ -147,6 +147,16 @@ public class UserController {
         }
 
         return returnValue;
+    }
+
+    @PutMapping(path = "/deleteUser",
+            produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE},
+            consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+    )
+    public void deleteUser(@RequestBody String uname) throws Exception {
+        String userName = uname.replace("\"", "");
+        userService.deleteUser(userName);
+
     }
 
 

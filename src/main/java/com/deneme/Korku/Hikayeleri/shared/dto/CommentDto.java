@@ -6,16 +6,16 @@ public class CommentDto {
 
     private String userID;
     private Long storyID;
-    private char isActive;
+    private String isActive;
     private String commentDate;
 
 
-    public Character getIsActive() {
+    public String getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(char isActive) {
-        this.isActive = 'Y';
+    public void setIsActive(String isActive) {
+        this.isActive = "Y";
     }
 
     public Long getId() {

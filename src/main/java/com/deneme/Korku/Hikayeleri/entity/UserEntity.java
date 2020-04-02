@@ -2,6 +2,7 @@ package com.deneme.Korku.Hikayeleri.entity;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity(name = "USERS")
 public class UserEntity implements Serializable {
@@ -9,7 +10,7 @@ public class UserEntity implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "usersId")
+    @Column(name = "users_Id")
     private Long id;
 
     @Column(nullable = false)
@@ -36,9 +37,8 @@ public class UserEntity implements Serializable {
     @Column(nullable = false)
     private String userName;
 
-    @Column(length = 1)
-    private Character isActive;
-
+    @Column(nullable = false)
+    private Boolean activeUser;
 
     public Long getId() {
         return id;
@@ -112,11 +112,11 @@ public class UserEntity implements Serializable {
         this.userName = userName;
     }
 
-    public char getIsActive() {
-        return isActive;
+    public Boolean getActiveUser() {
+        return activeUser;
     }
 
-    public void setIsActive(char isActive) {
-        this.isActive = isActive;
+    public void setActiveUser(Boolean activeUser) {
+        this.activeUser = activeUser;
     }
 }

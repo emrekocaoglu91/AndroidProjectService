@@ -1,15 +1,12 @@
 package com.test;
 
-import com.com.elasticemail.app.functions.Email;
 import com.deneme.Korku.Hikayeleri.shared.dto.UserDto;
-import com.elasticemail.app.API;
-import com.elasticemail.app.ApiTypes;
+
 
 public class App {
 
-    Email email = new Email();
-    ApiTypes.EmailSend response = null;
-    String subject = "Email Onayı";
+
+    String subject = "Korku Hikayeleri Email Onayı";
     String fromEmail = "softwareoffear@gmail.com";
     String fromName = "Korku Hikayeleri";
     final String PASSWORD_RESET_SUBJECT = "Password reset request";
@@ -46,8 +43,6 @@ public class App {
             + " Thank you!";
 
 
-
-
     public void verifyEmail(UserDto userDto) {
 
         // You can also set your keys this way. And it will work!
@@ -58,22 +53,6 @@ public class App {
         String htmlBodyWithToken = HTMLBODY.replace("$tokenValue", userDto.getEmailVerificationToken());
         String textBodyWithToken = TEXTBODY.replace("$tokenValue", userDto.getEmailVerificationToken());
 
-        try {
-            ApiTypes.StringArray abc = new ApiTypes.StringArray();
-            abc.add(userDto.getEmail());
-            response = email.send(subject, fromEmail, fromName, "", "", "", "", "", "", abc,
-                    null, null, null, null, null, null, "", htmlBodyWithToken, htmlBodyWithToken, "",
-                    "", "", null, ApiTypes.EncodingType.BASE64, null, null, null, null, null, null, null, true, null, false, false, null
-                    , null, null, null, null, null);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-        }
-
-        if (response != null) {
-            System.out.println("MsgID to store locally: " + response.messageid); // Available only if sent to a single recipient
-            System.out.println("TransactionID to store locally: " + response.transactionid);
-        }
 
         System.out.println("Email sent!");
 
@@ -90,32 +69,16 @@ public class App {
         textBodyWithToken = textBodyWithToken.replace("$firstName", firstName);
 
 
-        try {
-            Email email2 = new Email();
-            ApiTypes.StringArray abc = new ApiTypes.StringArray();
-            abc.add(email);
-            subject="Parola Yenileme";
-            response = email2.send(subject, fromEmail, fromName, "", "", "", "", "", "", abc,
-                    null, null, null, null, null, null, "", htmlBodyWithToken, htmlBodyWithToken, "",
-                    "", "", null, ApiTypes.EncodingType.BASE64, null, null, null, null, null, null, null, true, null, false, false, null
-                    , null, null, null, null, null);
-        } catch (Exception e) {
-            e.printStackTrace();
-            System.out.println(e.getMessage());
-        }
+        subject = "Parola Yenileme";
 
-        if (response != null) {
-            System.out.println("MsgID to store locally: " + response.messageid); // Available only if sent to a single recipient
-            System.out.println("TransactionID to store locally: " + response.transactionid);
-            returnValue = true;
-        }
 
         System.out.println("Email sent!");
 
 
         return returnValue;
-    }
 
+
+    }
 }
 
 

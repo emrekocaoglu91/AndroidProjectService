@@ -21,8 +21,8 @@ public class CommentEntity implements Serializable {
     @Column(name = "COMMENT_STORY_ID",nullable = false)
     private Long storyID;
 
-    @Column(name = "IS_ACTIVE")
-    private Character isActive;
+    @Column(name = "IS_ACTIVE",length = 1)
+    private String isActive;
 
     @Column(name = "COMMENT_DATE")
     private String commentDate;
@@ -30,12 +30,14 @@ public class CommentEntity implements Serializable {
     @Column(name = "COMMENT_USER_NAME")
     private String userName;
 
+    @Column(name = "COMMENT_IS_DELETED")
+    private Boolean deleted;
 
     public CommentEntity() {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy hh:mm");
         String strDate= formatter.format(new Date());
 
-        this.isActive = 'Y';
+        this.isActive = "Y";
         this.commentDate = strDate;
     }
 
@@ -71,11 +73,11 @@ public class CommentEntity implements Serializable {
         this.storyID = storyID;
     }
 
-    public Character getIsActive() {
+    public String getIsActive() {
         return isActive;
     }
 
-    public void setIsActive(char isActive) {
+    public void setIsActive(String isActive) {
         this.isActive = isActive;
     }
 
@@ -93,5 +95,13 @@ public class CommentEntity implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Boolean getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Boolean deleted) {
+        this.deleted = deleted;
     }
 }

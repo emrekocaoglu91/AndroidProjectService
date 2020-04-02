@@ -14,6 +14,7 @@ public class UserDto implements Serializable {
     private String emailVerificationToken;
     private boolean emailVerificationStatus = false;
     private String userName;
+    private boolean isActive;
 
 
     public Long getId() {
@@ -94,5 +95,13 @@ public class UserDto implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 }

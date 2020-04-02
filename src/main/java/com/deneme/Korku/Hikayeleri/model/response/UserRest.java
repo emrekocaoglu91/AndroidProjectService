@@ -11,9 +11,14 @@ public class UserRest {
 
     private String email;
 
-    private char isActive;
+    private Boolean isActive;
 
     private String userName;
+
+
+    public UserRest(Boolean isActive) {
+        this.isActive = true;
+    }
 
     public String getUserId() {
         return userId;
@@ -47,12 +52,12 @@ public class UserRest {
         this.email = email;
     }
 
-    public char getIsActive() {
+    public Boolean getActive() {
         return isActive;
     }
 
-    public void setIsActive(char isActive) {
-        this.isActive = isActive;
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 
     public String getUserName() {

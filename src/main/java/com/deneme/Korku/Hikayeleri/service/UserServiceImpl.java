@@ -1,8 +1,10 @@
 package com.deneme.Korku.Hikayeleri.service;
 
+import com.deneme.Korku.Hikayeleri.entity.CommentEntity;
 import com.deneme.Korku.Hikayeleri.entity.PasswordResetTokenEntity;
 import com.deneme.Korku.Hikayeleri.entity.UserEntity;
 import com.deneme.Korku.Hikayeleri.exception.UserServiceException;
+import com.deneme.Korku.Hikayeleri.mailSender.MailSender;
 import com.deneme.Korku.Hikayeleri.model.response.ErrorMessages;
 import com.deneme.Korku.Hikayeleri.repository.PasswordResetTokenRepository;
 import com.deneme.Korku.Hikayeleri.repository.UserRepository;
@@ -30,6 +32,9 @@ public class UserServiceImpl implements UserService {
     UserRepository userRepository;
 
     @Autowired
+    CommentService commentService;
+
+    @Autowired
     Utils utils;
 
     @Autowired
@@ -55,6 +60,7 @@ public class UserServiceImpl implements UserService {
         //İstediğimiz uzunlukta random userId oluşturmak için
         String publicUserId = utils.generateUserId(30);
         userEntity.setUserId(publicUserId);
+        userEntity.setActiveUser(true);
         userEntity.setEmailVerificationToken(utils.generateEmailVerificationToken(publicUserId));
         userEntity.setEmailVerificationStatus(false);
         userEntity.setEncryptedPassword(bCryptPasswordEncoder.encode(userDto.getPassword()));
@@ -63,7 +69,7 @@ public class UserServiceImpl implements UserService {
         UserDto dto = new UserDto();
 
         BeanUtils.copyProperties(storedUserEntity, dto);
-        new App().verifyEmail(dto);
+        new MailSender().verifyEmail(dto);
         return dto;
     }
 
@@ -72,7 +78,7 @@ public class UserServiceImpl implements UserService {
 
         UserEntity userEntity = userRepository.findByUserName(userName);
         if (userEntity == null) throw new UsernameNotFoundException(userName);
-
+        if (!userEntity.getActiveUser()) throw new UsernameNotFoundException(userName);
 
         UserDto returnValue = new UserDto();
         BeanUtils.copyProperties(userEntity, returnValue);
@@ -83,7 +89,7 @@ public class UserServiceImpl implements UserService {
     public UserDto getUserByUserId(String userId) throws Exception {
         UserEntity userEntity = userRepository.findByUserId(userId);
         if (userEntity == null) throw new Exception("User not found !");
-
+        if (!userEntity.getActiveUser())throw new Exception("User not found !");
         UserDto userDto = new UserDto();
         BeanUtils.copyProperties(userEntity, userDto);
         return userDto;
@@ -94,6 +100,7 @@ public class UserServiceImpl implements UserService {
         UserDto dto = new UserDto();
         UserEntity userEntity = userRepository.findByUserId(userId);
         if (userEntity == null) throw new Exception(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
+        if (!userEntity.getActiveUser()) throw new Exception(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
 
         userEntity.setFirstName(userDto.getFirstName());
         userEntity.setLastName(userDto.getLastName());
@@ -130,7 +137,7 @@ public class UserServiceImpl implements UserService {
 
         UserEntity userEntity = userRepository.findByEmailVerificationToken(token);
 
-        if (userEntity != null) {
+        if (userEntity != null && userEntity.getActiveUser()) {
             boolean hastokenExpired = Utils.hasTokenExpired(token);
             if (!hastokenExpired) {
                 userEntity.setEmailVerificationToken(null);
@@ -161,7 +168,7 @@ public class UserServiceImpl implements UserService {
         passwordResetTokenRepository.save(passwordResetTokenEntity);
 
 
-        returnValue = new App().sendPasswordResetRequest(userEntity.getFirstName(),userEntity.getEmail(),token);
+        returnValue = new MailSender().sendPasswordResetRequest(userEntity.getFirstName(),userEntity.getEmail(),token);
 
         return returnValue;
     }
@@ -201,12 +208,37 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void deleteUser(String userName) {
+
+        UserEntity userEntity = userRepository.findByUserName(userName);
+        if (userEntity==null) try {
+            throw new Exception(ErrorMessages.NO_RECORD_FOUND.getErrorMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }else{
+            userEntity.setActiveUser(false);
+            commentService.setDeletedUserCommentToPassive(userEntity.getUserId());
+        }
+
+        userRepository.save(userEntity);
+
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         UserEntity userEntity = userRepository.findByUserName(userName);
         if (userEntity == null) throw new UsernameNotFoundException(userName);
+       // if (!userEntity.getActiveUser()) throw new UsernameNotFoundException(userName);
+
+        if (!userEntity.getActiveUser()){
+            userEntity.setActiveUser(true);
+            userRepository.save(userEntity);
+            commentService.setReactiveUserCommentToActive(userEntity.getUserId());
+        }
+
 
         return new User(userEntity.getUserName(),userEntity.getEncryptedPassword(),
-                userEntity.getEmailVerificationStatus(),true,true,true,new ArrayList<>());
+                userEntity.getEmailVerificationStatus(),userEntity.getActiveUser(),true,true,new ArrayList<>());
 
 
        // return new User(userEntity.getUserName(), userEntity.getEncryptedPassword(), new ArrayList<>());
