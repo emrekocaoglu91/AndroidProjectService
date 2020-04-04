@@ -48,12 +48,12 @@ public class MailSender {
 
 
 
-    public boolean sendPasswordResetRequest(String firstName,String email, String token){
+    public boolean sendPasswordResetRequest(String userName,String email, String token){
 
         Session session = getSession();
         try {
             String textBodyWithToken = PASSWORD_RESET_TEXTBODY.replace("$tokenValue", token);
-            textBodyWithToken = textBodyWithToken.replace("$firstName", firstName);
+            textBodyWithToken = textBodyWithToken.replace("$firstName", userName);
 
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress("softwareoffear@gmail.com"));

@@ -168,7 +168,7 @@ public class UserServiceImpl implements UserService {
         passwordResetTokenRepository.save(passwordResetTokenEntity);
 
 
-        returnValue = new MailSender().sendPasswordResetRequest(userEntity.getFirstName(),userEntity.getEmail(),token);
+        returnValue = new MailSender().sendPasswordResetRequest(userEntity.getUserName(),userEntity.getEmail(),token);
 
         return returnValue;
     }
