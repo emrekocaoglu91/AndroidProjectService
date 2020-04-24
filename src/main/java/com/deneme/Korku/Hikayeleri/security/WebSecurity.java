@@ -60,16 +60,6 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
         return filter;
     }
 
-
-    //TODO
-
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("emrkcglu").password("123");
-    }
-
-
     @Bean
     public CorsConfigurationSource corsConfigurationSource(){
         final CorsConfiguration configuration = new CorsConfiguration();
