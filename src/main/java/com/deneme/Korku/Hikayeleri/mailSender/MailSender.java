@@ -18,7 +18,7 @@ public class MailSender {
     final String TEXTBODY = "Lütfen mail adresinizi doğrulayınız. "
             + "Korku Hikayelerine kayıt olduğunuz için teşekkür ederiz."
             + "Kayıt işlemini tamamlamak ve giriş yapabilmek için aşağıdaki linke tıklayınız : "
-            + " http://ec2-52-59-205-203.eu-central-1.compute.amazonaws.com:8080/verification-service/email-verification.html?token=$tokenValue"
+            + " http://**************************************/verification-service/email-verification.html?token=$tokenValue"
             + " Teşekkürler! Uygulamada görüşmek üzere.";
 
     // The email body for recipients with non-HTML email clients.
@@ -26,7 +26,7 @@ public class MailSender {
              "Merhaba, $firstName! "
             + " Birisi projemizle şifrenizi sıfırlamayı talep etti. Eğer siz değilseniz, lütfen dikkate almayınız."
             + " Bunu yapan sizseniz yeni bir şifre belirlemek için lütfen aşağıdaki bağlantıyı açın:"
-            + " http://ec2-52-59-205-203.eu-central-1.compute.amazonaws.com:8080/verification-service/password-reset.html?token=$tokenValue"
+            + " http://**************************************/verification-service/password-reset.html?token=$tokenValue"
             + " Teşekkürler !";
 
 
@@ -35,7 +35,7 @@ public class MailSender {
         try {
             String textBodyWithToken = TEXTBODY.replace("$tokenValue", userDto.getEmailVerificationToken());
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("softwareoffear@gmail.com"));
+            message.setFrom(new InternetAddress("****************"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(userDto.getEmail()));
             message.setSubject("Korku Hikayeleri Email Onayı ");
             message.setText(textBodyWithToken);
@@ -56,20 +56,19 @@ public class MailSender {
             textBodyWithToken = textBodyWithToken.replace("$firstName", userName);
 
             Message message = new MimeMessage(session);
-            message.setFrom(new InternetAddress("softwareoffear@gmail.com"));
+            message.setFrom(new InternetAddress("*****************"));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
             message.setSubject("Korku Hikayeleri Şifre Sıfırlama ");
             message.setText(textBodyWithToken);
             Transport.send(message);
-            System.out.println("Mail şu adrese gönderildi : " +email);
-            return true;
+            
         } catch (MessagingException ex) {
             throw new RuntimeException(ex);
         }
    }
     private Session getSession() {
-        final String username = "softwareoffear@gmail.com";
-        final String password = "nganausv";
+        final String username = "***************";
+        final String password = "***************";
         Properties properties = new Properties();
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.starttls.enable", "true");
